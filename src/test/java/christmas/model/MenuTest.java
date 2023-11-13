@@ -1,0 +1,65 @@
+package christmas.model;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
+import java.util.EnumMap;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+@DisplayName("Menu Class")
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+public class MenuTest {
+    private final static String message = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
+
+    @ParameterizedTest
+    @ValueSource(strings = {"티본스테이크-1, 아이스크림-3", "아이스크림-1", "초코케이크-3 , 양 송 이 수프 - 5,    샴페인- 01"})
+    void Menu_생성자_정상_출력_확인(String argument) {
+        assertThat(new Menu(argument)).isInstanceOf(Menu.class);
+        assertThatCode(() -> new Menu(argument)).doesNotThrowAnyException();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"잠온다-3", "아이스크림-3, 실례가-1,안된다면-3"})
+    void 없는_메뉴_입력시_예외_처리(String argument) {
+        assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(message);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"제로콜라-4294967297", "아이스크림-3.141592, 레드와인-3", "크리스마스파스타-0", "해물파스타-987654321", "해물파스타-ONE",
+            "바비큐립-공백", "양송이수프-!@#", "제로콜라-2147483647", "제로콜라-2147483648"})
+    void 메뉴_개수_1개_이하_숫자_예외_처리(String argument) {
+        assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(message);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"아이스크림-1,,레드와인-3", "아이스크림,레드와인,해물파스타", "해물파스타-1 양송이수프-3", "해물파스타--1,티본스테이크-3"})
+    void 메뉴_형식이_다른_경우_예외_처리(String argument) {
+        assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(message);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"아이스크림-3,아이스크림-2,아이스크림-1", "레드와인-3,아이스크림-1,레드와인-1", "샴페인-3,샴페인-3"})
+    void 중복_메뉴를_입력한_경우_예외_처리(String argument) {
+        assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(message);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"아이스크림-300", "제로콜라-4294967297", "제로콜라-2147483647", "해물파스타-10,양송이수프-10,레드와인-1"})
+    void 메뉴_20개_이상_예외_처리(String argument) {
+        assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(message);
+    }
+}
