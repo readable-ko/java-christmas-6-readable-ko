@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-@DisplayName("LottoRank 클래스")
+@DisplayName("MenuType")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class MenuTypeTest {
     @ParameterizedTest
