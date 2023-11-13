@@ -49,6 +49,7 @@ public class Menu {
 
     private void validation() {
         Validate.isInMinMax(orderedMenu);
+        Validate.isOnlyDrinks(orderedMenu);
     }
 
     public EnumMap<MenuType, Integer> getOrderedMenu() {
