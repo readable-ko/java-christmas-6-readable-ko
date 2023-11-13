@@ -1,5 +1,7 @@
 package christmas.model;
 
+import static christmas.utils.ErrorMessage.DRINK_ONLY_NOT_ALLOWED;
+import static christmas.utils.ErrorMessage.IS_MORE_THAN_MAXIMUM;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -58,8 +60,15 @@ public class MenuTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"아이스크림-300", "제로콜라-4294967297", "제로콜라-2147483647", "해물파스타-10,양송이수프-10,레드와인-1"})
-    void 메뉴_20개_이상_예외_처리(String argument) {
+    void 메뉴_20개_이상_주문_불가_예외_처리(String argument) {
         assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(message);
+                .hasMessage(IS_MORE_THAN_MAXIMUM);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"제로콜라-2, 레드와인-3, 샴페인-1", "제로콜라-15", "레드와인-3", "샴페인-5"})
+    void 음료만_시킬_경우_주문_불가_예외_처리(String argument) {
+        assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(DRINK_ONLY_NOT_ALLOWED);
     }
 }
