@@ -18,9 +18,9 @@ public enum MenuType {
     CHAMPAGNE("샴페인", 25000);
 
     private final String title;
-    private final long price;
+    private final int price;
 
-    MenuType(String title, long price) {
+    MenuType(String title, int price) {
         this.title = title;
         this.price = price;
     }
@@ -41,7 +41,7 @@ public enum MenuType {
         return title;
     }
 
-    public long getPrice(int number) {
+    public int getPrice(int number) {
         return price * number;
     }
 }
