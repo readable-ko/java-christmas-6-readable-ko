@@ -10,7 +10,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class Menu {
-    final EnumMap<MenuType, Integer> orderedMenu = new EnumMap<>(MenuType.class);
+    private final EnumMap<MenuType, Integer> orderedMenu = new EnumMap<>(MenuType.class);
 
     public Menu(String ordered) {
         final List<String> orderedMenuWithCounts = List.of(ordered.replace(" ", "").split(","));
@@ -50,6 +50,13 @@ public class Menu {
     private void validation() {
         Validate.isInMinMax(orderedMenu);
         Validate.isOnlyDrinks(orderedMenu);
+    }
+
+    public int getTotalPrice() {
+        return orderedMenu.entrySet()
+                .stream()
+                .mapToInt(entry -> entry.getKey().getPrice(entry.getValue()))
+                .sum();
     }
 
     public EnumMap<MenuType, Integer> getOrderedMenu() {
