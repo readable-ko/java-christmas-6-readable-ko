@@ -44,5 +44,5 @@ public enum CourseMenu {
         return menuItems.stream()
                 .anyMatch(courseMenu -> courseMenu == menu);
     }
-
+    
 }

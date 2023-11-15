@@ -2,9 +2,7 @@ package christmas.model;
 
 import static christmas.utils.MagicNumber.ONE;
 import static christmas.utils.MagicNumber.ZERO;
-import static christmas.utils.Message.DISCOUNT_MESSAGE;
 
-import christmas.view.OutputView;
 import java.util.EnumMap;
 
 public class Money {

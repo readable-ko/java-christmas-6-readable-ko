@@ -1,9 +1,7 @@
 package christmas.model;
 
-import static christmas.utils.MagicNumber.LAST_CHRISTMAS_SALE_DAY;
 import static christmas.utils.MagicNumber.ONE;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Arrays;

@@ -1,7 +1,5 @@
 package christmas.model;
 
-import static christmas.utils.ErrorMessage.DRINK_ONLY_NOT_ALLOWED;
-import static christmas.utils.ErrorMessage.IS_MORE_THAN_MAXIMUM;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;

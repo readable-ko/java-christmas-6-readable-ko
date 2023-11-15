@@ -1,6 +1,15 @@
 package christmas.controller;
 
-import static christmas.utils.Message.*;
+import static christmas.utils.Message.AFTER_DATE_MESSAGE;
+import static christmas.utils.Message.AFTER_MENU_MESSAGE;
+import static christmas.utils.Message.DISCOUNT_HISTORY;
+import static christmas.utils.Message.DISCOUNT_MESSAGE;
+import static christmas.utils.Message.EVENT_BADGE;
+import static christmas.utils.Message.GIVE_AWAY_MESSAGE;
+import static christmas.utils.Message.ONE_GIVE_AWAY;
+import static christmas.utils.Message.ORDER_AMOUNT_MESSAGE;
+import static christmas.utils.Message.TOTAL_CHARGE_AMOUNT;
+import static christmas.utils.Message.TOTAL_DISCOUNT;
 
 import christmas.model.Badge;
 import christmas.model.Customer;
@@ -8,7 +17,6 @@ import christmas.model.Date;
 import christmas.model.Menu;
 import christmas.model.MenuType;
 import christmas.model.Money;
-import christmas.model.Sale;
 import christmas.model.SaleType;
 import christmas.view.OutputView;
 
