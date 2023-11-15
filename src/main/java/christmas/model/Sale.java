@@ -1,5 +1,6 @@
 package christmas.model;
 
+import static christmas.utils.MagicNumber.MIN_DISCOUNT_AMOUNT;
 import static christmas.utils.MagicNumber.ZERO;
 
 import java.util.Arrays;
@@ -21,6 +22,10 @@ public class Sale {
 
     public EnumMap<SaleType, Integer> checkSale(int totalPrice) {
         EnumMap<SaleType, Integer> saleTypes = new EnumMap<>(SaleType.class);
+        if (isNotSaleCondition(totalPrice)) {
+            saleTypes.put(SaleType.NONE, 0);
+            return saleTypes;
+        }
 
         Arrays.stream(SaleType.values())
                 .filter(saleType -> saleType.applySale(date, menu) > ZERO)
@@ -30,6 +35,10 @@ public class Sale {
             saleTypes.put(SaleType.NONE, 0);
         }
         return saleTypes;
+    }
+
+    private boolean isNotSaleCondition(int totalPrice) {
+        return totalPrice < MIN_DISCOUNT_AMOUNT;
     }
 
     public Money getMoney() {
