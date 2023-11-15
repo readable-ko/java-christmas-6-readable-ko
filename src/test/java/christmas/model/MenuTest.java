@@ -32,8 +32,8 @@ public class MenuTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"제로콜라-4294967297", "아이스크림-3.141592, 레드와인-3", "크리스마스파스타-0", "해물파스타-987654321", "해물파스타-ONE",
-            "바비큐립-공백", "양송이수프-!@#", "제로콜라-2147483647", "제로콜라-2147483648"})
+    @ValueSource(strings = {"아이스크림-3.141592, 레드와인-3", "크리스마스파스타-0", "해물파스타-ONE",
+            "바비큐립-공백", "양송이수프-!@#"})
     void 메뉴_개수_1개_이하_숫자_예외_처리(String argument) {
         assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(message);
@@ -54,16 +54,23 @@ public class MenuTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"아이스크림-300", "제로콜라-4294967297", "제로콜라-2147483647", "해물파스타-10,양송이수프-10,레드와인-1"})
+    @ValueSource(strings = {"제로콜라-42", "해산물파스타-987654321", "해산물파스타-10,제로콜라-10,레드와인-1"})
     void 메뉴_20개_이상_주문_불가_예외_처리(String argument) {
         assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(IS_MORE_THAN_MAXIMUM);
+                .hasMessage("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"제로콜라-4294967297", "제로콜라-2147483648", "제로콜라-2147483649"})
+    void 정수값_이상_주문_예외_처리(String argument) {
+        assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"제로콜라-2, 레드와인-3, 샴페인-1", "제로콜라-15", "레드와인-3", "샴페인-5"})
     void 음료만_시킬_경우_주문_불가_예외_처리(String argument) {
         assertThatThrownBy(() -> new Menu(argument)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(DRINK_ONLY_NOT_ALLOWED);
+                .hasMessage("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
     }
 }
