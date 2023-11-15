@@ -24,6 +24,12 @@ public class Validate {
         }
     }
 
+    public static void isOverIntegerRange(long target) {
+        if (target > MAX_MENU_VALUE) {
+            throw new IllegalArgumentException(IS_MORE_THAN_MAXIMUM);
+        }
+    }
+
     public static void isInDateRange(int target) {
         isMoreThanMaximum(target, MAX_CALENDAR_DAY, IS_NOT_INTEGER_DATE);
         isLessThanMinimum(target, ONE, IS_NOT_INTEGER_DATE);

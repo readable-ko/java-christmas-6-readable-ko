@@ -3,7 +3,7 @@ package christmas.model;
 import static christmas.utils.MagicNumber.LAST_CHRISTMAS_SALE_DAY;
 import static christmas.utils.ErrorMessage.IS_NOT_INTEGER_DATE;
 
-import christmas.utils.IntegerParser;
+import christmas.utils.Parser;
 import christmas.utils.Validate;
 
 public class Date {
@@ -11,7 +11,7 @@ public class Date {
     private final int day;
 
     public Date(String date) {
-        day = IntegerParser.convert(date, IS_NOT_INTEGER_DATE);
+        day = Parser.intConvert(date, IS_NOT_INTEGER_DATE);
         validation();
 
         dateEventType = DateEventType.findDateOfWeek(day);

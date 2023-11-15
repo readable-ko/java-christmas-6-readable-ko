@@ -3,8 +3,9 @@ package christmas.model;
 import static christmas.utils.ErrorMessage.IS_NOT_DEFINED_MENU;
 import static christmas.utils.MagicNumber.ONE;
 import static christmas.utils.MagicNumber.ZERO;
+import static christmas.utils.Validate.isOverIntegerRange;
 
-import christmas.utils.IntegerParser;
+import christmas.utils.Parser;
 import christmas.utils.Validate;
 import java.util.EnumMap;
 import java.util.List;
@@ -25,8 +26,9 @@ public class Menu {
 
             MenuType menu = findMenu(part);
 
-            int count = IntegerParser.convert(part.get(ONE), IS_NOT_DEFINED_MENU);
-            addMenu(menu, count);
+            long tmp_count = Parser.longConvert(part.get(ONE), IS_NOT_DEFINED_MENU);
+            isOverIntegerRange(tmp_count);
+            addMenu(menu, (int) tmp_count);
         }
     }
 
